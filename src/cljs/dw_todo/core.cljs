@@ -8,12 +8,20 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to dw-todo"]
-   [:div [:a {:href "/about"} "go to about page"]]])
+  [:div.page-content
+   [:h2 "Todo:"]
+   [:div [:a {:href "/about"} "About this todo list"]]])
 
 (defn about-page []
-  [:div [:h2 "About dw-todo"]
-   [:div [:a {:href "/"} "go to the home page"]]])
+  [:div.page-content
+   [:h2 "About dw-todo"]
+   [:p
+    "Submission for the Democracy Works Anonymous Coding Exercise. Base project template is "
+    [:a {:href "https://github.com/reagent-project/reagent-template"} "Reagent Template"]]
+   [:p
+    "This code is deployed to "
+    [:a {:href "http://fathomless-savannah-40879.herokuapp.com"} "Heroku"]]
+   [:p [:a {:href "/"} "Back to Todo List"]]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
