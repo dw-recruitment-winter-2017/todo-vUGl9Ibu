@@ -1,5 +1,5 @@
 (ns dw-todo.handler
-  (:require [compojure.core :refer [GET defroutes context]]
+  (:require [compojure.core :refer [GET POST defroutes context]]
             [compojure.route :refer [not-found resources]]
             [hiccup.page :refer [include-js include-css html5]]
             [dw-todo.middleware :refer [wrap-middleware]]
@@ -36,13 +36,19 @@
   {:status 200
    :body (model/all-todos (db conn))})
 
+(defn create-todo [conn params]
+  {:status 201
+   :body (model/create-todo conn params)})
+
 (defroutes routes
   (GET "/" [] (loading-page))
   (GET "/about" [] (loading-page))
 
   (context "/api" []
            (GET "/todos" {conn :db-conn}
-                (todo-list conn)))
+                (todo-list conn))
+           (POST "/todos" {conn :db-conn params :params}
+                 (create-todo conn params)))
 
   (resources "/")
   (not-found "Not Found"))
