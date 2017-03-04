@@ -6,22 +6,21 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [ring-server "0.4.0"]
-                 [reagent "0.6.0"]
-                 [reagent-utils "0.2.0"]
-                 [ring "1.5.0"]
-                 [ring/ring-defaults "0.2.1"]
-                 [compojure "1.5.1"]
+                 [reagent "0.6.0" :exclusions [com.google.guava/guava]]
+                 [reagent-utils "0.2.1"]
+                 [ring "1.5.1"]
+                 [ring/ring-defaults "0.2.3"]
+                 [compojure "1.5.2"]
                  [hiccup "1.0.5"]
                  [yogthos/config "0.8"]
                  [org.clojure/clojurescript "1.9.473"
                   :scope "provided"]
                  [secretary "1.2.3"]
-                 [venantius/accountant "0.1.7"
+                 [venantius/accountant "0.1.9"
                   :exclusions [org.clojure/tools.reader]]
-                 [com.datomic/datomic-free "0.9.5561"]
+                 [com.datomic/datomic-free "0.9.5561" :exclusions [com.google.guava/guava]]
                  [cljs-ajax "0.5.8"]
-                 [ring-middleware-format "0.7.2"]
-                 [com.cognitect/transit-cljs "0.8.239"]]
+                 [ring-middleware-format "0.7.2"]]
 
   :plugins [[lein-environ "1.0.2"]
             [lein-cljsbuild "1.1.1"]
@@ -96,17 +95,18 @@
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :dependencies [[ring/ring-mock "0.3.0"]
-                                  [ring/ring-devel "1.5.0"]
+                                  [ring/ring-devel "1.5.1"]
                                   [prone "1.1.4"]
-                                  [figwheel-sidecar "0.5.8"]
+                                  [figwheel-sidecar "0.5.9" :exclusions [com.google.guava/guava org.clojure/core.async]]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [com.cemerick/piggieback "0.2.2-SNAPSHOT"]
                                   [pjstadig/humane-test-output "0.8.1"]
                                   ]
 
                    :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.5.8"]
-                             [lein-doo "0.1.6"]
+                   :plugins [[lein-figwheel "0.5.9"]
+                             [lein-doo "0.1.6" :exclusions [com.google.javascript/closure-compiler
+                                                            com.google.javascript/closure-compiler-externs]]
                              ]
 
                    :injections [(require 'pjstadig.humane-test-output)
