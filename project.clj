@@ -17,7 +17,11 @@
                   :scope "provided"]
                  [secretary "1.2.3"]
                  [venantius/accountant "0.1.7"
-                  :exclusions [org.clojure/tools.reader]]]
+                  :exclusions [org.clojure/tools.reader]]
+                 [com.datomic/datomic-free "0.9.5561"]
+                 [cljs-ajax "0.5.8"]
+                 [ring-middleware-format "0.7.2"]
+                 [com.cognitect/transit-cljs "0.8.239"]]
 
   :plugins [[lein-environ "1.0.2"]
             [lein-cljsbuild "1.1.1"]

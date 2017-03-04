@@ -2,15 +2,11 @@
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
               [secretary.core :as secretary :include-macros true]
-              [accountant.core :as accountant]))
+              [accountant.core :as accountant]
+              [dw-todo.todo-view :refer [todo-page]]))
 
 ;; -------------------------
 ;; Views
-
-(defn home-page []
-  [:div.page-content
-   [:h2 "Todo:"]
-   [:div [:a {:href "/about"} "About this todo list"]]])
 
 (defn about-page []
   [:div.page-content
@@ -30,7 +26,7 @@
 ;; Routes
 
 (secretary/defroute "/" []
-  (session/put! :current-page #'home-page))
+  (session/put! :current-page #'todo-page))
 
 (secretary/defroute "/about" []
   (session/put! :current-page #'about-page))
