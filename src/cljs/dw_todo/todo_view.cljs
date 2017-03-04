@@ -17,15 +17,18 @@
 
 (defn todo-list
   [{:keys [todos]}]
-  [:ul
+  [:div
    (map (fn [item]
-          [:li {:key (:todo/id item)} (:todo/description item)])
+          [:div.row {:key (:todo/id item)}
+           [:div.one.column
+            [:input {:type :checkbox :name :todo/complete :value true :defaultChecked false}]]
+           [:div.eleven.columns (:todo/description item)]])
         @todos)])
 
 (defn todo-page []
   (fetch-todos)
   (fn []
-    [:div.page-content
+    [:div.container
      [:h2 "Todo:"]
      [todo-list {:todos todos}]
-     [:div [:a {:href "/about"} "About this todo list"]]]))
+     [:div.row.much-space [:a {:href "/about"} "About this todo list"]]]))

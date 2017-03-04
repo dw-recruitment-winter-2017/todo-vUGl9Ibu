@@ -20,7 +20,10 @@
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
-   (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
+   ;; TODO: bring back css minification
+   (include-css "/css/normalize.css")
+   (include-css "/css/skeleton.css")
+   (include-css "/css/site.css")])
 
 (defn loading-page []
   (html5
