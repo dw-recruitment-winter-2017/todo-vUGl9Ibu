@@ -15,9 +15,9 @@
     (GET "/api/todos" {:handler handler :error-handler error-handler})))
 
 (defn todo-list []
-  [:div
+  [:div#todo-list
    (map (fn [item]
-          [:div.row {:key (:todo/id item)}
+          [:div.row.todo-item {:key (:todo/id item)}
            [:div.one.column
             [:input {:type :checkbox :name :todo/complete :value true :defaultChecked false}]]
            [:div.eleven.columns (:todo/description item)]])
@@ -42,10 +42,11 @@
       [:div.row
        [:form {:on-submit handle-submit}
         [:div.ten.columns
-         [:input.u-full-width {:type "text"
-                               :placeholder "Add a new todo"
-                               :value @text
-                               :on-change #(reset! text (.. % -target -value))}]]
+         [:input.new-todo.u-full-width {:type "text"
+                                        :placeholder "Add a new todo"
+                                        :value @text
+                                        :auto-focus true
+                                        :on-change #(reset! text (.. % -target -value))}]]
         [:div.two.columns
          [:input {:type :submit :value "Add"}]]]])))
 

@@ -101,6 +101,8 @@
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [com.cemerick/piggieback "0.2.2-SNAPSHOT"]
                                   [pjstadig/humane-test-output "0.8.1"]
+                                  [clj-webdriver "0.7.2"]
+                                  [org.seleniumhq.selenium/selenium-server "3.2.0"]
                                   ]
 
                    :source-paths ["env/dev/clj"]

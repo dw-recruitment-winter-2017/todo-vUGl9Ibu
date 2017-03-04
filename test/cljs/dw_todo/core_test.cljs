@@ -1,7 +1,8 @@
 (ns dw-todo.core-test
   (:require [cljs.test :refer-macros [is are deftest testing use-fixtures]]
             [reagent.core :as reagent :refer [atom]]
-            [dw-todo.core :as rc]))
+            [dw-todo.core :as rc]
+            [dw-todo.todo-view :as todo-view]))
 
 
 (def isClient (not (nil? (try (.-document js/window)
@@ -24,7 +25,6 @@
         (reagent/flush)
         (.removeChild (.-body js/document) div)))))
 
-
 (defn found-in [re div]
   (let [res (.-innerHTML div)]
     (if (re-find re res)
@@ -32,8 +32,7 @@
       (do (println "Not found: " res)
           false))))
 
-
 (deftest test-home
-  (with-mounted-component (rc/home-page)
+  (with-mounted-component (todo-view/todo-page)
     (fn [c div]
-      (is (found-in #"Welcome to" div)))))
+      (is (found-in #"About this todo list" div)))))
