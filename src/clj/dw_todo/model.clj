@@ -48,23 +48,3 @@
     {:todo/id (d/squuid) :todo/description "mark todo as completed" :todo/complete false}
     {:todo/id (d/squuid) :todo/description "unmark todo as completed" :todo/complete false}
     {:todo/id (d/squuid) :todo/description "delete existing todos" :todo/complete false}]))
-
-(comment
-  (def uri "datomic:mem://dw-todo")
-  (d/create-database uri)
-  (def conn (d/connect uri))
-  (load-schema conn)
-  (d/transact
-   conn
-   [{:todo/id (d/squuid) :todo/description "render todo items" :todo/complete false}
-    {:todo/id (d/squuid) :todo/description "write feature test" :todo/complete false}
-    {:todo/id (d/squuid) :todo/description "new todo item form" :todo/complete false}
-    {:todo/id (d/squuid) :todo/description "mark todo as completed" :todo/complete false}
-    {:todo/id (d/squuid) :todo/description "unmark todo as completed" :todo/complete false}
-    {:todo/id (d/squuid) :todo/description "delete existing todos" :todo/complete false}])
-
-
-  (create-todo conn {:todo/description "more stuff"})
-
-  (all-todos (d/db conn))
-  )
