@@ -35,7 +35,9 @@
 
 (defn todo-list [conn]
   {:status 200
-   :body (model/all-todos (db conn))})
+   :body (->> (model/all-todos (db conn))
+              (sort-by :todo/id)
+              (into []))})
 
 (defn create-todo [conn params]
   {:status 201

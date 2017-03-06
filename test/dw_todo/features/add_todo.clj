@@ -51,7 +51,11 @@
   (to test-base-url)
   (is (.contains (text "h2") "Todo:"))
   (focus "input.new-todo")
-  (send-keys "input.new-todo" "write some feature specs")
-  (click "input[value='Add']")
-  (let [elem (find-element {:text "write some feature specs"})]
-    (is (not (nil? elem)))))
+  (let [todo-text "write some feature specs"]
+    (testing "todo is added to the end of the list"
+      (send-keys "input.new-todo" todo-text)
+      (click "input[value='Add']")
+      (is (not (nil? (find-element {:text todo-text})))))
+    (testing "new todo is persisted and consistently sorted"
+      (refresh)
+      (is (not (nil? (find-element {:text todo-text})))))))
