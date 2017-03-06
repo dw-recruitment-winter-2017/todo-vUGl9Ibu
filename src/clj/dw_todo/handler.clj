@@ -6,7 +6,8 @@
             [config.core :refer [env]]
             [dw-todo.model :as model]
             [datomic.api :as d :refer [db]]
-            [ring.middleware.format :refer [wrap-restful-format]]))
+            [ring.middleware.format :refer [wrap-restful-format]]
+            [ring.logger :refer [wrap-with-logger]]))
 
 (def mount-target
   [:div#app
@@ -64,7 +65,11 @@
     (fn [request]
       (handler (assoc request :db-conn conn)))))
 
-(def app
+(defn make-app [{uri :db-uri}]
   (-> (wrap-middleware #'routes)
-      (wrap-database db-uri)
-      (wrap-restful-format :formats [:transit-json :json-kw])))
+      (wrap-database uri)
+      (wrap-restful-format :formats [:transit-json :json-kw])
+      (wrap-with-logger)))
+
+(def app
+  (make-app {:db-uri db-uri}))

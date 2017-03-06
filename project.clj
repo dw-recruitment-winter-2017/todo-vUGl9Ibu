@@ -20,7 +20,10 @@
                   :exclusions [org.clojure/tools.reader]]
                  [com.datomic/datomic-free "0.9.5561" :exclusions [com.google.guava/guava]]
                  [cljs-ajax "0.5.8"]
-                 [ring-middleware-format "0.7.2"]]
+                 [ring-middleware-format "0.7.2"]
+                 [org.clojure/tools.logging "0.3.1"]
+                 [ch.qos.logback/logback-classic "1.2.1"]
+                 [ring-logger "0.7.7"]]
 
   :plugins [[lein-environ "1.0.2"]
             [lein-cljsbuild "1.1.1"]
